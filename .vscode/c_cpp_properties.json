@@ -1,0 +1,29 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${default}"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/clang++",
+            "cStandard": "c17",
+            "cppStandard": "c++23",
+            "intelliSenseMode": "linux-clang-x64"
+                        //"compileCommands": "${workspaceFolder}/compile_commands.json"
+        },
+        {
+            "name": "Windows",
+            "includePath": [
+                "${default}"
+            ],
+            "defines": [],
+            "compilerPath": "C:\\msys64\\ucrt64\\bin\\clang++",
+            "cStandard": "c17",
+            "cppStandard": "c++23",
+            "intelliSenseMode": "windows-clang-x64"
+                        //"compileCommands": "${workspaceFolder}/compile_commands.json"
+        }
+    ],
+    "version": 4
+}
