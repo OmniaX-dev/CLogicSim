@@ -1,6 +1,7 @@
 #pragma once
 
 #include <ostd/BaseObject.hpp>
+#include <ostd/Color.hpp>
 #include <ostd/Geometry.hpp>
 #include <ogfx/BasicRenderer.hpp>
 #include <ogfx/WindowBase.hpp>
@@ -14,4 +15,10 @@ class Drawable : public ostd::BaseObject
 
 	protected:
 		ostd::Rectangle m_bounds;
+};
+
+class Utils
+{
+    public:
+        static void drawCornerRect(ogfx::BasicRenderer2D& gfx, const ostd::Rectangle& rect, const ostd::Color& color, int32_t thickness, int32_t segmentLength);
 };

@@ -2,6 +2,7 @@
 
 #include "Global.hpp"
 #include <ogfx/BasicRenderer.hpp>
+#include <ostd/Color.hpp>
 
 class BaseComponent : public Drawable
 {
@@ -23,6 +24,10 @@ class BaseComponent : public Drawable
 		ostd::Vec2 m_mousePos;
 		ostd::Vec2 m_pressPoint;
 		bool m_mousePressedInside { false };
+
+        ostd::Color m_borderColor;
+        ostd::Color m_borderColorSelected;
+        ostd::Color m_boxColor;
 
         inline static int32_t s_nextID = { 1024 }; 
 };

@@ -1,8 +1,6 @@
 #include "ComponentManager.hpp"
-#include <memory>
 #include <ogfx/BasicRenderer.hpp>
 #include <ostd/Signals.hpp>
-#include <ostream>
 
 ComponentManager& ComponentManager::instance(void)
 {
@@ -24,6 +22,7 @@ void ComponentManager::render(ogfx::BasicRenderer2D& gfx)
     {
         component->render(gfx);
     }
+    drawSelectedBorder(gfx);
 }
 
 bool ComponentManager::addComponent(BaseComponent& component)
@@ -67,6 +66,10 @@ void ComponentManager::handleSignal(ostd::tSignal& signal)
             selectComponent(-1);
             return;
         }
+        if (hasSelected())
+        {
+            m_selectedComponent->handleSignal(signal);
+        }
     }
     else if (signal.ID == ostd::tBuiltinSignals::MouseDragged)
     {
@@ -98,6 +101,21 @@ void ComponentManager::selectComponent(int32_t index)
     m_selectedComponent->select(true);
     m_selectedIndex = index;
 }
+
+void ComponentManager::drawSelectedBorder(ogfx::BasicRenderer2D& gfx)
+{
+    if (!hasSelected())
+        return;
+    auto bounds = m_selectedComponent->bounds();
+    int32_t segmentLength = 40;
+    int32_t padding = 20;
+    bounds.x -= padding;
+    bounds.y -= padding;
+    bounds.w += (padding * 2);
+    bounds.h += (padding * 2);
+    Utils::drawCornerRect(gfx, bounds, m_selectedBorderColor, 2, segmentLength);
+}
+
 
 ComponentManager::ComponentManager(void)
 {

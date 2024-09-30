@@ -29,6 +29,7 @@ list(APPEND SOURCE_FILES
 	${CMAKE_CURRENT_LIST_DIR}/src/BaseComponent.cpp
 	${CMAKE_CURRENT_LIST_DIR}/src/MainWindow.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/ComponentManager.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/Global.cpp
 )
 #-----------------------------------------------------------------------------------------
 

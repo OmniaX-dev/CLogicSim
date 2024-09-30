@@ -16,6 +16,7 @@ class ComponentManager : public ostd::BaseObject
         void handleSignal(ostd::tSignal& signal);
 
         void selectComponent(int32_t index);
+        void drawSelectedBorder(ogfx::BasicRenderer2D& gfx);
 
         inline bool hasSelected(void) const { return m_selectedComponent != nullptr && m_selectedIndex >= 0 && m_selectedIndex < m_components.size() && m_components.size() > 0; }
 
@@ -27,4 +28,6 @@ class ComponentManager : public ostd::BaseObject
         std::vector<BaseComponent*> m_components;
         BaseComponent* m_selectedComponent { nullptr };
         int32_t m_selectedIndex { -1 };
+
+        ostd::Color m_selectedBorderColor { 20, 150, 180 };
 };
