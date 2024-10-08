@@ -1,5 +1,6 @@
 #include "MainWindow.hpp"
 #include "ComponentManager.hpp"
+#include <ogfx/Image.hpp>
 
 void MainWindow::onInitialize(void)
 {
@@ -11,13 +12,14 @@ void MainWindow::onInitialize(void)
 	enableMouseDragEvent();
 	m_renderer2D.init(*this);
 	m_renderer2D.setFont("res/ttf/Courier Prime.ttf");
-
+    m_gridImg.loadFromFile("res/grid.png", m_renderer2D);
     ComponentManager::instance().addComponent(test);
     ComponentManager::instance().addComponent(test2);
 }	
 
 void MainWindow::onRender(void)
 {
+    m_renderer2D.drawImage(m_gridImg, { 0.0f, 0.0f });
     ComponentManager::instance().render(m_renderer2D);
 }
 
@@ -33,7 +35,7 @@ void MainWindow::handleSignal(ostd::tSignal& signal)
 		auto& keyData = static_cast<ogfx::KeyEventData&>(signal.userData);
 		if (keyData.keyCode == SDLK_ESCAPE)
 		{
-			close();	
+			close();
 		}
 	}
 }

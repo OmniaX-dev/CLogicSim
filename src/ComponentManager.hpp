@@ -28,6 +28,8 @@ class ComponentManager : public ostd::BaseObject
         std::vector<BaseComponent*> m_components;
         BaseComponent* m_selectedComponent { nullptr };
         int32_t m_selectedIndex { -1 };
+        ostd::Vec2 m_panClickPos { 0, 0 };
+        bool m_panClicked { false };
 
         ostd::Color m_selectedBorderColor { 20, 150, 180 };
 };

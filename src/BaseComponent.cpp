@@ -1,6 +1,6 @@
 #include "BaseComponent.hpp"
 #include <ogfx/BasicRenderer.hpp>
-#include <ostd/Random.hpp>
+#include <ostd/Utils.hpp>
 
 BaseComponent::BaseComponent(void)
 {
@@ -15,17 +15,19 @@ BaseComponent::BaseComponent(ogfx::WindowBase& window)
 BaseComponent& BaseComponent::init(ogfx::WindowBase& window)
 {
 	m_bounds = { 30, 30, 120, 60 };
-    m_boxColor = { ostd::Random::getui8((uint8_t)256), ostd::Random::getui8((uint8_t)256), ostd::Random::getui8((uint8_t)256), 200 };
-    m_borderColor = { ostd::Random::getui8((uint8_t)256), ostd::Random::getui8((uint8_t)256), ostd::Random::getui8((uint8_t)256), 255 };
-    m_borderColorSelected = { ostd::Random::getui8((uint8_t)256), ostd::Random::getui8((uint8_t)256), ostd::Random::getui8((uint8_t)256), 255 };
+    m_backgroundColor = { 80, 10, 10, 200 }; 
+    m_borderColor = { 230, 20, 20 };
+    m_borderColorSelected = { 255, 150, 150 };
+    m_textColor = { 230, 230, 230 };
     setID(BaseComponent::s_nextID++);
 	return *this;
 }
 
 void BaseComponent::render(ogfx::BasicRenderer2D& gfx)
 {
-	gfx.fillRect(m_bounds, m_boxColor);
+	gfx.fillRect(m_bounds, m_backgroundColor);
 	gfx.drawRect(m_bounds, (m_selected ? m_borderColorSelected : m_borderColor), 1);
+    gfx.drawCenteredString(toString(), m_bounds.getCenter(), m_textColor, 14);
 }
 
 void BaseComponent::update(void)
@@ -65,4 +67,9 @@ void BaseComponent::handleSignal(ostd::tSignal& signal)
 		if (m_mousePressedInside)
 			m_bounds.setPosition(m_mousePos - m_pressPoint);
 	}
+}
+
+ostd::String BaseComponent::toString(void) const
+{
+    return m_name + ":" + ostd::String("").add(getID());
 }

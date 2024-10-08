@@ -16,9 +16,13 @@ class BaseComponent : public Drawable
 		virtual void handleSignal(ostd::tSignal& signal) override;
         inline void select(bool s = true) { m_selected = s; }
         inline bool isSelected(void) const { return m_selected; }
+        ostd::String toString(void) const override;
+        inline void setName(const ostd::String& name) { m_name = name; }
+        inline ostd::String getName(void) const { return m_name; }
 
 	protected:
         bool m_selected { false };
+        ostd::String m_name { "BASE_C" };
 
 	private:
 		ostd::Vec2 m_mousePos;
@@ -27,7 +31,8 @@ class BaseComponent : public Drawable
 
         ostd::Color m_borderColor;
         ostd::Color m_borderColorSelected;
-        ostd::Color m_boxColor;
+        ostd::Color m_backgroundColor;
+        ostd::Color m_textColor;
 
         inline static int32_t s_nextID = { 1024 }; 
 };
