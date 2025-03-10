@@ -8,8 +8,9 @@
 class Board : public ostd::BaseObject
 {
     public:
-        inline Board(void) { init(); }
-        void init(void);
+        inline Board(void) { invalidate(); }
+        inline Board(ogfx::BasicRenderer2D& gfx) { init(gfx); }
+        void init(ogfx::BasicRenderer2D& gfx);
         void render(ogfx::BasicRenderer2D& gfx);
         void handleSignal(ostd::tSignal& signal) override;
 
@@ -17,4 +18,5 @@ class Board : public ostd::BaseObject
         ogfx::Image m_gridImg;
         bool m_panClicked { false };
         ostd::Vec2 m_panClickPos;
+        ostd::Vec2 m_gridPos;
 };

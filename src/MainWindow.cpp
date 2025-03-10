@@ -12,14 +12,14 @@ void MainWindow::onInitialize(void)
 	enableMouseDragEvent();
 	m_renderer2D.init(*this);
 	m_renderer2D.setFont("res/ttf/Courier Prime.ttf");
-    m_gridImg.loadFromFile("res/grid.png", m_renderer2D);
     ComponentManager::instance().addComponent(test);
     ComponentManager::instance().addComponent(test2);
+    m_mainBoard.init(m_renderer2D);
 }	
 
 void MainWindow::onRender(void)
 {
-    m_renderer2D.drawImage(m_gridImg, { 0.0f, 0.0f });
+    m_mainBoard.render(m_renderer2D);
     ComponentManager::instance().render(m_renderer2D);
 }
 

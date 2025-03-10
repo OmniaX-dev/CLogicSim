@@ -2,18 +2,22 @@
 #include <ogfx/WindowBase.hpp>
 #include <ostd/Signals.hpp>
 
-void Board::init(void)
+void Board::init(ogfx::BasicRenderer2D& gfx)
 {
+    m_gridImg.loadFromFile("res/grid.png", gfx);
+
     enableSignals();
     connectSignal(ostd::tBuiltinSignals::MouseDragged);
     connectSignal(ostd::tBuiltinSignals::MouseMoved);
     connectSignal(ostd::tBuiltinSignals::MousePressed);
     connectSignal(ostd::tBuiltinSignals::MouseReleased);
+
+    validate();
 }
 
 void Board::render(ogfx::BasicRenderer2D& gfx)
 {
-
+    gfx.drawImage(m_gridImg, m_gridPos);
 }
 
 void Board::handleSignal(ostd::tSignal& signal)
@@ -52,6 +56,7 @@ void Board::handleSignal(ostd::tSignal& signal)
                 return;
             ostd::Vec2 mousePos = { (float)mouseData.position_x, (float)mouseData.position_y };
             ostd::Vec2 posDiff = mousePos - m_panClickPos;
+            m_gridPos += posDiff;
 
             m_panClickPos = mousePos;
         }

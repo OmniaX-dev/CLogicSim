@@ -23,6 +23,8 @@ void ComponentManager::render(ogfx::BasicRenderer2D& gfx)
         component->render(gfx);
     }
     drawSelectedBorder(gfx);
+
+    gfx.drawLine({ { 100, 100 }, { 120, 300 } }, { 255, 0, 0 }, 4);
 }
 
 bool ComponentManager::addComponent(BaseComponent& component)
